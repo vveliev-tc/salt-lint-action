@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  # Build application minimal runtime for deployment
+  app_runtime:
+    build:
+      context: .
+    image: test/salt-lin-action:local
+    entrypoint: tail -f /entrypoint.sh
+    environment:
+      - GITHUB_WORKSPACE=/test
+    volumes:
+      - ./:/test
+    env_file:
+      - tests/test-regex-search.env
